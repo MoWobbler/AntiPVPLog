@@ -14,16 +14,15 @@ public class AntiPVPLog extends JavaPlugin {
 	public static JavaPlugin instance;
 	public static HashMap<UUID, PVPLoggedPlayer> dummySkeletons = new HashMap<UUID, PVPLoggedPlayer>();
 	
+	
+	
 	public static List<String> activeWorlds = new ArrayList<String>();
 
 	public void onEnable() {
 		saveConfig();
 		instance = this;
 		activeWorlds = getActiveWorlds();
-
-		// Checks for the jail plugin and if it is present sets it up
-		JailPlugin.initJail();
-
+		
 		getLogger().info("Active Worlds: " + activeWorlds.toString());
 		
 		PluginManager pm = getServer().getPluginManager();
@@ -34,6 +33,9 @@ public class AntiPVPLog extends JavaPlugin {
 		pm.registerEvents(new EntityDamageByEntity(), this);
 		pm.registerEvents(new PlayerMove(), this);
 		pm.registerEvents(new ChunkUnload(), this);
+		
+		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+		getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new BungeeMessenger());
 
 		getCommand("logout").setExecutor(new LogoutCommand());
 	}
@@ -49,7 +51,7 @@ public class AntiPVPLog extends JavaPlugin {
 		}
 
 	}
-
+	
 	public List<String> getActiveWorlds() {
 		return getConfig().getStringList("ActiveWorlds");
 	}
