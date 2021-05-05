@@ -41,14 +41,5 @@ public class BungeeMessenger implements PluginMessageListener{
 			  out.writeUTF("ALL");
 			  Bukkit.getServer().sendPluginMessage(AntiPVPLog.instance, "BungeeCord", out.toByteArray());
 		}
-		
-		public static void ForwardName() {
-			ByteArrayDataOutput out = ByteStreams.newDataOutput();
-			  out.writeUTF("PlayerList");
-			  out.writeUTF("ALL");
-			  Bukkit.getServer().sendPluginMessage(AntiPVPLog.instance, "BungeeCord", out.toByteArray());
-		}
-		
-	
-		
+			
 }
