@@ -45,6 +45,10 @@ public class PlayerQuit implements Listener {
 			return;
 		}
 		
+		if (JailPlugin.isPlayerJailed(player.getUniqueId())) {
+			return;
+		}
+		
 		//Check if player is still online
 		List<String> playerList = new ArrayList<>(Arrays.asList(BungeeMessenger.playerList));
 		
