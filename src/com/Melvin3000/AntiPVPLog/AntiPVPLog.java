@@ -25,6 +25,9 @@ public class AntiPVPLog extends JavaPlugin {
 		
 		getLogger().info("Active Worlds: " + activeWorlds.toString());
 		
+		// Checks for the jail plugin and if it is present sets it up
+		JailPlugin.initJail();
+		
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(new PlayerQuit(), this);
 		pm.registerEvents(new EntityDeath(), this);
