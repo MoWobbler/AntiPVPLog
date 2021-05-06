@@ -20,10 +20,10 @@ public class BungeeMessenger implements PluginMessageListener{
 		            ByteArrayDataInput in = ByteStreams.newDataInput(message);
 		            String subchannel = in.readUTF();
 		            if (subchannel.equals("PlayerList")) {
-
+		            	//Below part might need to be here
 		                String server = in.readUTF();
 		                playerList = in.readUTF().split(", ");
-		                PlayerQuit.newSkeleton();
+		                
 		            }
 	        	} catch (Exception e) {
 	        		e.printStackTrace();
