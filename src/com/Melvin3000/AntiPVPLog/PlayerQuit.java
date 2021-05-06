@@ -1,5 +1,6 @@
 package com.Melvin3000.AntiPVPLog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerQuit implements Listener {
 
@@ -19,23 +19,17 @@ public class PlayerQuit implements Listener {
 	
 	//Instead of checking if we should spawn a skeleton, we first need a list of all players
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event) {
+	public void onPlayerQuit(PlayerQuitEvent event) throws IOException {
 		p = event.getPlayer();
 		BungeeMessenger.PlayerList();
-		
-	    new BukkitRunnable() {
-	        @Override
-	        public void run() {
-	             newSkeleton(p);
-	        }
-	    }.runTaskLater(AntiPVPLog.instance, 5L);
-		
+
 	}
 	
 	//After we get a list of all players, check if we can spawn a skeleton
-	public static void newSkeleton(Player player) {
+	public static void newSkeleton() {
 		
-	
+		Player player = p;
+		
 		if (!AntiPVPLog.activeWorlds.contains(player.getWorld().getName())) {
 			return;
 		}
