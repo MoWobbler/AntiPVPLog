@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerQuit implements Listener {
 
@@ -21,13 +22,20 @@ public class PlayerQuit implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		p = event.getPlayer();
 		BungeeMessenger.PlayerList();
+		
+	    new BukkitRunnable() {
+	        @Override
+	        public void run() {
+	             newSkeleton(p);
+	        }
+	    }.runTaskLater(AntiPVPLog.instance, 5L);
+		
 	}
 	
 	//After we get a list of all players, check if we can spawn a skeleton
-	public static void newSkeleton() {
+	public static void newSkeleton(Player player) {
 		
-		Player player = p;
-		
+	
 		if (!AntiPVPLog.activeWorlds.contains(player.getWorld().getName())) {
 			return;
 		}
